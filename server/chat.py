@@ -1,11 +1,13 @@
 """
 Stores the information about the chat
 """
+from .round import Round
 
 class Chat(object):
 
-    def __init__(self):
+    def __init__(self, round):
         self.content = []
+        self.round = round
 
     def update_chat(self, msg):
         self.content.append(msg)

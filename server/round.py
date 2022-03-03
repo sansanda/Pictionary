@@ -5,6 +5,8 @@ from numpy import place
 
 import time as t
 from _thread import *
+from .chat import Chat
+from .game import Game
 
 class Round(object):
 
@@ -21,10 +23,15 @@ class Round(object):
         self.skips = 0
         self.players_score = {player:0 for player in players}
         self.time = 75
+        self.chat = Chat(self)
         self.start = t.time()
         start_new_thread(self.time_thread, ())
 
     def time_thread(self):
+        """
+        Runs in thread to keep track of time
+        :return: None
+        """
         while self.time > 0:
             t.sleep(1)
             self.time -= 1
@@ -40,7 +47,7 @@ class Round(object):
         correct = self.word == wrd
         if correct:
             self.player_guessed.append(player)
-            # TODO Implement scoreing system here
+            # TODO Implement scoring system here
 
     def player_left(self, player):
         """
